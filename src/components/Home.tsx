@@ -44,7 +44,9 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (containerRef.current) {
       const swapy = createSwapy(containerRef.current);
-
+      swapy.onSwap(({ data }) => {
+        setProject(data.object.one);
+      });
       swapy.enable(true);
     }
   });
