@@ -4,7 +4,7 @@ import { createSwapy } from "swapy";
 import { AnimatePresence, motion } from "framer-motion";
 
 const defaultItemStyle =
-  "w-full h-full flex items-center justify-center text-white text-4xl cursor-pointer relative";
+  " h-full flex items-center justify-center text-white text-4xl cursor-pointer relative";
 
 function A() {
   return (
@@ -66,15 +66,17 @@ const Home: React.FC = () => {
           {project}
         </motion.div>
       </AnimatePresence>
-      <div className="container" ref={containerRef}>
+      <div
+        className="flex flex-col p-2.5 gap-1 md:w-1/2 w-full"
+        ref={containerRef}
+      >
         <div className="slot a" data-swapy-slot="one">
           <A />
         </div>
-        <div className="second-row">
-          <div className="slot b" data-swapy-slot="two"></div>
-          <div className="slot c" data-swapy-slot="three">
-            <C />
-          </div>
+
+        <div className="slot b" data-swapy-slot="two"></div>
+        <div className="slot c" data-swapy-slot="three">
+          <C />
         </div>
         <div className="slot d" data-swapy-slot="four">
           <D />

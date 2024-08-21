@@ -21,25 +21,19 @@
 
 .slot {
   background: #111;
-  flex: 1;
+  height: 150px;
 }
 
 .slot.a {
-  flex-basis: 150px;
   height: 150px;
 }
 
 .slot.b {
-  flex: 2;
-}
-
-.second-row {
-  height: 100px;
+  height: 150px;
 }
 
 .slot.d {
-  flex-basis: 120px;
-  height: 120px;
+  height: 150px;
 }
 
 .item {
