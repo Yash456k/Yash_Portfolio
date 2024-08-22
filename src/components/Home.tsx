@@ -1,18 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import "./style.css";
 import { createSwapy } from "swapy";
 import { motion } from "framer-motion";
 
 const defaultItemStyle =
-  "h-full flex items-center justify-center text-white cursor-pointer relative";
+  "h-full w-full flex items-center justify-center text-white cursor-pointer relative";
 
 function A() {
   return (
     <div
-      className={`${defaultItemStyle} text-center bg-gradient-to-r from-red-500 to-red-700 rounded-lg shadow-lg`}
+      className={`${defaultItemStyle} text-center rounded-lg shadow-lg overflow-hidden`}
       data-swapy-item="a"
     >
-      Quotes by Marcus Aurelius
+      <img
+        src="https://cdn.dribbble.com/userupload/7995514/file/original-1823e321984a1e14ca26f0ee32fea988.png?resize=1200x900"
+        alt="Marcus Aurelius Quote"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <span className=" font-bold">Quotes by Marcus Aurelius</span>
+      </div>
     </div>
   );
 }
@@ -20,7 +26,7 @@ function A() {
 function B() {
   return (
     <div
-      className={`${defaultItemStyle}  bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg`}
+      className={`${defaultItemStyle} bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg`}
       data-swapy-item="b"
     >
       B
@@ -42,7 +48,7 @@ function C() {
 function projectDisplay(id: string) {
   switch (id) {
     case "a":
-      return <div>This is A!</div>;
+      return <div>This is A: Marcus Aurelius Quotes</div>;
     case "b":
       return <div>This is B!</div>;
     case "c":
@@ -67,8 +73,8 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col-reverse md:flex-row h-screen overflow-hidden bg-gradient-to-br from-gray-100 to-gray-300">
-      <div className="md:w-1/2 w-full h-[70%] md:h-full flex items-center justify-center p-10">
+    <div className="flex flex-col-reverse md:flex-row h-screen overflow-hidden bg-white">
+      <div className="md:w-1/2 w-full h-[65%] md:h-full flex items-center justify-center md:p-10 p-2">
         <motion.div
           key={project}
           initial={{ opacity: 0, y: 20 }}
@@ -78,15 +84,18 @@ const Home: React.FC = () => {
             duration: 0.5,
             ease: "easeInOut",
           }}
-          className="text-3xl text-gray-800 font-bold"
+          className="text-3xl text-center text-gray-800 font-bold"
         >
           {projectDisplay(project)}
         </motion.div>
       </div>
       <div
         ref={containerRef}
-        className="mt-10 md:w-1/2 w-full h-[30%] md:h-full flex flex-col justify-around items-center p-10  md:text-2xl text-base"
+        className="mt-10 md:w-1/2 w-full h-[35%] md:h-full flex flex-col justify-around items-center md:p-10 p-2 md:text-2xl text-sm"
       >
+        <h3 className="font-bold py-8">
+          Drag and swap the items to view project details !
+        </h3>
         <div
           className="md:h-1/3 h-2/3 md:w-1/2 w-3/5 a rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out md:text-4xl text-2xl"
           data-swapy-slot="one"

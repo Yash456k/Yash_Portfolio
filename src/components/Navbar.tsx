@@ -14,7 +14,7 @@ const menuItems: MenuItem[] = [
   {
     id: "services",
     label: "SERVICES",
-    submenu: ["Web Design", "Development", "Marketing"],
+    submenu: ["Development"],
   },
   { id: "contact", label: "CONTACT", submenu: ["Email", "Phone", "Location"] },
 ];
@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">
-        <div className="text-2xl font-bold text-purple-600">Logo</div>
+        <div className="text-2xl font-bold text-[#b3b382]">Logo</div>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} className="text-gray-600">
             <Menu size={24} />
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
                   whileHover={{ backgroundColor: "#800080", color: "#ffffff" }}
                   transition={{
                     type: "spring",
-                    duration: 0.7,
+                    duration: 0.4,
                   }}
                 >
                   {item.label}
@@ -94,7 +94,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mt-2"
+            className="md:hidden mt-2 overflow-hidden"
           >
             {menuItems.map((item) => (
               <div key={item.id} className="py-2">
@@ -119,7 +119,7 @@ const Navbar: React.FC = () => {
                         <a
                           key={index}
                           href="#"
-                          className="block py-2 text-sm text-gray-600 hover:text-purple-600"
+                          className="block py-2 text-sm text-gray-600 hover:text-purple-600 overflow-hidden"
                         >
                           {subItem}
                         </a>
@@ -140,7 +140,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: elementHeight }}
             exit={{ opacity: 0, height: 0 }}
             transition={{
-              duration: 0.5,
+              duration: 0.3,
             }}
             className="fixed left-0 mt-2 w-screen shadow-lg bg-white ring-1 ring-black ring-opacity-5 overflow-hidden hidden md:block"
             onMouseEnter={() => {
