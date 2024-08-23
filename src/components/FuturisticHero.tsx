@@ -9,6 +9,8 @@ const GlossyHeroSection: React.FC = () => {
   const texts = ["Full Stack Developer", "Freelancer"];
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  //need to refactor below part...
+
   useEffect(() => {
     const handleTyping = () => {
       const currentWord = texts[currentIndex];

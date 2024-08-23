@@ -1,15 +1,15 @@
 import "./App.css";
 import GlossyHeroSection from "./components/FuturisticHero";
 
-import Home from "./components/Home";
+import Projects from "./components/projects/Projects";
 import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className=" w-screen bg-blue-900">
+    <div>
       <Navbar />
       <GlossyHeroSection />
-      <Home />
+      <Projects />
     </div>
   );
 }
