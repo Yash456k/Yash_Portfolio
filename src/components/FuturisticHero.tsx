@@ -17,14 +17,17 @@ const GlossyHeroSection: React.FC = () => {
         : currentWord.substring(0, currentText.length + 1);
       setCurrentText(nextText);
       if (!isDeleting && nextText === currentWord) {
+        // the part where the word is typed out and it waits before deleting
         setIsDeleting(true);
         setTypingSpeed(2000);
       } else if (isDeleting && nextText === "") {
+        //writing part
         setIsDeleting(false);
         setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        setTypingSpeed(90);
-      } else if (isDeleting && nextText !== currentWord) {
         setTypingSpeed(60);
+      } else if (isDeleting && nextText !== currentWord) {
+        setTypingSpeed(40);
+        //deleting part
       }
     };
     const timer = setTimeout(handleTyping, typingSpeed);
