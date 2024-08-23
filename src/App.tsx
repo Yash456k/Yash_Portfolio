@@ -10,7 +10,6 @@ function App() {
       <Navbar />
       <GlossyHeroSection />
       <Home />
-      <div className="h-screen w-screen"></div>
     </div>
   );
 }

@@ -230,8 +230,8 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col-reverse md:flex-row md:h-screen h-[110vh] overflow-hidden bg-gray-100">
-      <div className="md:w-1/2 w-full h-[60%] md:h-full flex-col flex items-center justify-around p-2 md:p-4 lg:p-10">
+    <div className="flex flex-col-reverse md:flex-row md:h-screen h-[120vh] overflow-hidden bg-gray-100">
+      <div className="md:w-1/2 w-full h-[60%] md:h-full flex-col flex items-center md:justify-around justify-evenly p-2 md:p-4 lg:p-10">
         <motion.div
           key={project}
           initial={{ opacity: 0, y: 20 }}
