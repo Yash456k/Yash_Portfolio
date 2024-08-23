@@ -1,5 +1,5 @@
 import "./App.css";
-import GlossyHeroSection from "./components/FuturisticHero";
+import HeroSection from "./components/HeroSection";
 
 import Projects from "./components/projects/Projects";
 import Navbar from "./components/Navbar";
@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <GlossyHeroSection />
+      <HeroSection />
       <Projects />
     </div>
   );
