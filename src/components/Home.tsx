@@ -1,9 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { createSwapy } from "swapy";
 import { motion } from "framer-motion";
+import marcusPng from "../assets/quotesbymarcusaurelius.png";
+import chatAppPng from "../assets/MERN_Socketio_ChatApp_Screenshot.png";
+import MernNotesPng from "../assets/MERN_Notes_App.png";
 
 const defaultItemStyle =
   "h-full w-full flex items-center justify-center text-white cursor-pointer relative";
+
+interface AlertProps {
+  title: string;
+  description: string;
+}
+
+const Alert: React.FC<AlertProps> = ({ title, description }) => (
+  <div
+    className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-8 text-sm"
+    role="alert"
+  >
+    <p className="font-bold">{title}</p>
+    <p>{description}</p>
+  </div>
+);
 
 function A() {
   return (
@@ -12,12 +30,12 @@ function A() {
       data-swapy-item="a"
     >
       <img
-        src="https://cdn.dribbble.com/userupload/7995514/file/original-1823e321984a1e14ca26f0ee32fea988.png?resize=1200x900"
+        src={marcusPng}
         alt="Marcus Aurelius Quote"
         className="absolute inset-0 w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <span className=" font-bold">Quotes by Marcus Aurelius</span>
+        <span className="font-bold">Quotes by Marcus Aurelius</span>
       </div>
     </div>
   );
@@ -26,10 +44,17 @@ function A() {
 function B() {
   return (
     <div
-      className={`${defaultItemStyle} bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg shadow-lg`}
+      className={`${defaultItemStyle} text-center rounded-lg shadow-lg overflow-hidden`}
       data-swapy-item="b"
     >
-      B
+      <img
+        src={chatAppPng}
+        alt="Chat App"
+        className="absolute inset-0 w-full h-full object-fill"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <span className="font-bold">MERN + socket.io Chat App</span>
+      </div>
     </div>
   );
 }
@@ -37,10 +62,17 @@ function B() {
 function C() {
   return (
     <div
-      className={`${defaultItemStyle} bg-gradient-to-r from-pink-500 to-pink-700 rounded-lg shadow-lg`}
+      className={`${defaultItemStyle} text-center rounded-lg shadow-lg overflow-hidden`}
       data-swapy-item="c"
     >
-      C
+      <img
+        src={MernNotesPng}
+        alt="Mern Notes App"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <span className="font-bold">MERN Notes App</span>
+      </div>
     </div>
   );
 }
@@ -48,11 +80,102 @@ function C() {
 function projectDisplay(id: string) {
   switch (id) {
     case "a":
-      return <div>This is A: Marcus Aurelius Quotes</div>;
+      return (
+        <div className="space-y-4">
+          <h2 className="md:text-4xl text-2xl font-bold mb-4">
+            Quotes by Marcus Aurelius
+          </h2>
+          <p>
+            An inspiring collection of wisdom from the great Stoic philosopher
+            Marcus Aurelius.
+          </p>
+          <ul className="list-disc list-inside">
+            <li>
+              Features over 100 hand-picked quotes from the book "Meditations by
+              Marcus Aurelius"
+            </li>
+            <li>
+              Beautiful minimalist design, with 3 themes you can choose from
+            </li>
+            <li>
+              A quote rotation algorithm to make sure you view unique quotes
+              everytime
+            </li>
+            <li>Ability to bookmark favorites and create custom collections</li>
+          </ul>
+          <p>
+            Perfect for people who are inspired by stoic quotes and love to read
+            and bookmark them
+          </p>
+          <div className="flex gap-5 items-center">
+            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+              View Demo
+            </button>
+            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+              Source Code
+            </button>
+          </div>
+        </div>
+      );
     case "b":
-      return <div>This is B!</div>;
+      return (
+        <div className="space-y-4 ">
+          <h2 className="md:text-4xl text-2xl font-bold mb-4">
+            MERN + socket.io Chat App
+          </h2>
+          <p>
+            A real-time chat application built with modern web technologies.
+          </p>
+          <ul className="list-disc list-inside">
+            <li>Instant messaging website using WebSockets (Socket.io)</li>
+            <li>User authentication with firebase and Google OAuth2.0</li>
+            <li>
+              Text with anyone on the app, with your messages being stored
+              securely on a database
+            </li>
+            <li>You can also chat with Google Gemini</li>
+          </ul>
+          <p>
+            Experience seamless communication in this feature-rich chat
+            platform.
+          </p>
+          <div className="flex gap-5 items-center">
+            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+              View Demo
+            </button>
+            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+              Source Code
+            </button>
+          </div>
+        </div>
+      );
     case "c":
-      return <div>This is C!</div>;
+      return (
+        <div className="space-y-4">
+          <h2 className="md:text-4xl text-2xl font-bold mb-4">
+            MERN Notes App
+          </h2>
+          <p>A powerful note-taking application built on the MERN stack.</p>
+          <ul className="list-disc list-inside">
+            <li>Create, edit, and organize notes with ease</li>
+            <li>Rich text editing with markdown support</li>
+            <li>Tag and categorize notes for easy retrieval</li>
+            <li>Secure user authentication and data encryption</li>
+          </ul>
+          <p>
+            Stay organized and boost your productivity with this versatile notes
+            app.
+          </p>
+          <div className="flex gap-5 items-center">
+            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+              View Demo
+            </button>
+            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+              Source Code
+            </button>
+          </div>
+        </div>
+      );
     default:
       return null;
   }
@@ -73,8 +196,8 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col-reverse md:flex-row h-screen overflow-hidden bg-white">
-      <div className="md:w-1/2 w-full h-[65%] md:h-full flex items-center justify-center md:p-10 p-2">
+    <div className="flex flex-col-reverse md:flex-row h-screen overflow-hidden bg-gray-100">
+      <div className="md:w-1/2 w-full h-[65%] md:h-full flex-col flex items-center justify-around md:p-10 p-2">
         <motion.div
           key={project}
           initial={{ opacity: 0, y: 20 }}
@@ -84,18 +207,22 @@ const Home: React.FC = () => {
             duration: 0.5,
             ease: "easeInOut",
           }}
-          className="text-3xl text-center text-gray-800 font-bold"
+          className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl md:text-lg text-sm"
         >
           {projectDisplay(project)}
         </motion.div>
+        <button className="p-3 rounded-full mt-6 bg-black text-white shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out">
+          View all my projects
+        </button>
       </div>
       <div
         ref={containerRef}
         className="mt-10 md:w-1/2 w-full h-[35%] md:h-full flex flex-col justify-around items-center md:p-10 p-2 md:text-2xl text-sm"
       >
-        <h3 className="font-bold py-8">
-          Drag and swap the items to view project details !
-        </h3>
+        <Alert
+          title="Interact with the Projects!"
+          description="Drag and swap the items below to view detailed project information in the showcase area."
+        />
         <div
           className="md:h-1/3 h-2/3 md:w-1/2 w-3/5 a rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out md:text-4xl text-2xl"
           data-swapy-slot="one"

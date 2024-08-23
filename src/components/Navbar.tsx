@@ -56,9 +56,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="bg-white px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
+    <nav className="bg-white bg-opacity-0 backdrop-blur-lg px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">
-        <div className="text-2xl font-bold text-[#b3b382]">Logo</div>
+        <div className="text-3xl font-bold text-[#b3b382]">Yash K</div>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} className="text-gray-600">
             <Menu size={24} />
@@ -66,14 +66,17 @@ const Navbar: React.FC = () => {
         </div>
         <ul className="hidden md:flex">
           {menuItems.map((item) => (
-            <li key={item.id} className="relative">
+            <li key={item.id} className="relative ">
               <motion.div
                 onMouseEnter={() => handleMouseEnter(item.id)}
                 onMouseLeave={handleMouseLeave}
               >
                 <motion.button
-                  className="text-black rounded-none bg-white py-2 text-sm font-medium px-4 border-none outline-none focus:outline-none font-sans overflow-hidden"
-                  whileHover={{ backgroundColor: "#800080", color: "#ffffff" }}
+                  className="text-black rounded-none  py-2 text-base font-medium px-4 border-none outline-none focus:outline-none font-sans overflow-hidden"
+                  whileHover={{
+                    backgroundColor: "#b3b382",
+                    color: "#ffffff",
+                  }}
                   transition={{
                     type: "spring",
                     duration: 0.4,
@@ -94,7 +97,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mt-2 overflow-hidden"
+            className="md:hidden mt-2 overflow-hidden bg-white bg-opacity-50 backdrop-blur-md"
           >
             {menuItems.map((item) => (
               <div key={item.id} className="py-2">
@@ -113,13 +116,13 @@ const Navbar: React.FC = () => {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="pl-4"
+                      className="pl-4 "
                     >
                       {item.submenu.map((subItem, index) => (
                         <a
                           key={index}
                           href="#"
-                          className="block py-2 text-sm text-gray-600 hover:text-purple-600 overflow-hidden"
+                          className="block py-2 text-sm text-gray-600 hover:text-purple-600 overflow-hidden "
                         >
                           {subItem}
                         </a>
@@ -142,7 +145,7 @@ const Navbar: React.FC = () => {
             transition={{
               duration: 0.3,
             }}
-            className="fixed left-0 mt-2 w-screen shadow-lg bg-white ring-1 ring-black ring-opacity-5 overflow-hidden hidden md:block"
+            className="fixed left-0 mt-2 w-screen shadow-lg bg-white bg-opacity-90 backdrop-blur-md ring-1 ring-black ring-opacity-5 overflow-hidden hidden md:block"
             onMouseEnter={() => {
               if (timeoutRef.current !== null) {
                 clearTimeout(timeoutRef.current);
@@ -150,14 +153,14 @@ const Navbar: React.FC = () => {
             }}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="py-1 container mx-auto">
+            <div className="py-1 container mx-auto text-center ">
               {menuItems
                 .find((item) => item.id === activeItem)
                 ?.submenu.map((subItem, index) => (
                   <a
                     key={index}
                     href="#"
-                    className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 hover:bg-opacity-50 "
                   >
                     {subItem}
                   </a>
