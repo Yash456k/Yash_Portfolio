@@ -15,7 +15,7 @@ interface AlertProps {
 
 const Alert: React.FC<AlertProps> = ({ title, description }) => (
   <div
-    className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-8 text-sm"
+    className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4 text-xs sm:text-sm"
     role="alert"
   >
     <p className="font-bold">{title}</p>
@@ -35,7 +35,9 @@ function A() {
         className="absolute inset-0 w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <span className="font-bold">Quotes by Marcus Aurelius</span>
+        <span className="font-bold text-xs sm:text-base">
+          Quotes by Marcus Aurelius
+        </span>
       </div>
     </div>
   );
@@ -53,7 +55,9 @@ function B() {
         className="absolute inset-0 w-full h-full object-fill"
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <span className="font-bold">MERN + socket.io Chat App</span>
+        <span className="font-bold text-xs sm:text-base">
+          MERN + socket.io Chat App
+        </span>
       </div>
     </div>
   );
@@ -71,7 +75,7 @@ function C() {
         className="absolute inset-0 w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <span className="font-bold">MERN Notes App</span>
+        <span className="font-bold text-xs sm:text-base">MERN Notes App</span>
       </div>
     </div>
   );
@@ -81,15 +85,15 @@ function projectDisplay(id: string) {
   switch (id) {
     case "a":
       return (
-        <div className="space-y-4">
-          <h2 className="md:text-4xl text-2xl font-bold mb-4">
+        <div className="space-y-2">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold mb-2 sm:mb-4">
             Quotes by Marcus Aurelius
           </h2>
-          <p>
+          <p className="text-sm sm:text-base">
             An inspiring collection of wisdom from the great Stoic philosopher
             Marcus Aurelius.
           </p>
-          <ul className="list-disc list-inside">
+          <ul className="list-disc list-inside space-y-1 sm:space-y-2.5 text-sm sm:text-base">
             <li>
               Features over 100 hand-picked quotes from the book "Meditations by
               Marcus Aurelius"
@@ -103,15 +107,25 @@ function projectDisplay(id: string) {
             </li>
             <li>Ability to bookmark favorites and create custom collections</li>
           </ul>
-          <p>
-            Perfect for people who are inspired by stoic quotes and love to read
-            and bookmark them
+          <p className="text-black text-xs sm:text-sm">
+            Tech used: <span className="text-[#bfbf52]">MongoDB</span>,{" "}
+            <span className="text-[#bfbf52]">Express</span>,{" "}
+            <span className="text-[#bfbf52]">Reactjs</span>,{" "}
+            <span className="text-[#bfbf52]">NodeJS</span>,{" "}
+            <span className="text-[#bfbf52]">Socket.io</span>
           </p>
-          <div className="flex gap-5 items-center">
-            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+          <p className="text-black text-xs sm:text-sm">
+            Tools used: <span className="text-[#bfbf52]">Google OAuth2.0</span>,{" "}
+            <span className="text-[#bfbf52]">Firebase</span>,{" "}
+            <span className="text-[#bfbf52]">Gemini API</span>,{" "}
+            <span className="text-[#bfbf52]">JWT</span>,{" "}
+            <span className="text-[#bfbf52]">React Context API</span>
+          </p>
+          <div className="flex gap-3 sm:gap-5 items-center">
+            <button className="p-1 px-2 sm:px-3 rounded-full mt-4 sm:mt-6 bg-black text-white text-xs sm:text-sm">
               View Demo
             </button>
-            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+            <button className="p-1 px-2 sm:px-3 rounded-full mt-4 sm:mt-6 bg-black text-white text-xs sm:text-sm">
               Source Code
             </button>
           </div>
@@ -119,14 +133,14 @@ function projectDisplay(id: string) {
       );
     case "b":
       return (
-        <div className="space-y-4 ">
-          <h2 className="md:text-4xl text-2xl font-bold mb-4">
+        <div className="space-y-2">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold mb-2 sm:mb-4">
             MERN + socket.io Chat App
           </h2>
-          <p>
+          <p className="text-sm sm:text-base">
             A real-time chat application built with modern web technologies.
           </p>
-          <ul className="list-disc list-inside">
+          <ul className="list-disc list-inside space-y-1 sm:space-y-2.5 text-sm sm:text-base">
             <li>Instant messaging website using WebSockets (Socket.io)</li>
             <li>User authentication with firebase and Google OAuth2.0</li>
             <li>
@@ -135,15 +149,26 @@ function projectDisplay(id: string) {
             </li>
             <li>You can also chat with Google Gemini</li>
           </ul>
-          <p>
-            Experience seamless communication in this feature-rich chat
-            platform.
+          <p className="text-black text-xs sm:text-sm">
+            Tech used: <span className="text-[#bfbf52]">MongoDB</span>,{" "}
+            <span className="text-[#bfbf52]">Express</span>,{" "}
+            <span className="text-[#bfbf52]">Reactjs</span>,{" "}
+            <span className="text-[#bfbf52]">NodeJS</span>,{" "}
+            <span className="text-[#bfbf52]">Socket.io</span>
           </p>
-          <div className="flex gap-5 items-center">
-            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+          <p className="text-black text-xs sm:text-sm">
+            Tools used: <span className="text-[#bfbf52]">Google OAuth2.0</span>,{" "}
+            <span className="text-[#bfbf52]">Firebase</span>,{" "}
+            <span className="text-[#bfbf52]">Gemini API</span>,{" "}
+            <span className="text-[#bfbf52]">JWT</span>,{" "}
+            <span className="text-[#bfbf52]">React Context API</span>
+          </p>
+
+          <div className="flex gap-3 sm:gap-5 items-center">
+            <button className="p-1 px-2 sm:px-3 rounded-full mt-4 sm:mt-6 bg-black text-white text-xs sm:text-sm">
               View Demo
             </button>
-            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+            <button className="p-1 px-2 sm:px-3 rounded-full mt-4 sm:mt-6 bg-black text-white text-xs sm:text-sm">
               Source Code
             </button>
           </div>
@@ -151,26 +176,35 @@ function projectDisplay(id: string) {
       );
     case "c":
       return (
-        <div className="space-y-4">
-          <h2 className="md:text-4xl text-2xl font-bold mb-4">
+        <div className="space-y-2">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold mb-2 sm:mb-4">
             MERN Notes App
           </h2>
-          <p>A powerful note-taking application built on the MERN stack.</p>
-          <ul className="list-disc list-inside">
+          <p className="text-sm sm:text-base">
+            A powerful note-taking application built on the MERN stack.
+          </p>
+          <ul className="list-disc list-inside space-y-1 sm:space-y-2.5 text-sm sm:text-base">
             <li>Create, edit, and organize notes with ease</li>
             <li>Rich text editing with markdown support</li>
             <li>Tag and categorize notes for easy retrieval</li>
             <li>Secure user authentication and data encryption</li>
           </ul>
-          <p>
-            Stay organized and boost your productivity with this versatile notes
-            app.
+          <p className="text-black text-xs sm:text-sm">
+            Tech used: <span className="text-[#bfbf52]">MongoDB</span>,{" "}
+            <span className="text-[#bfbf52]">Express</span>,{" "}
+            <span className="text-[#bfbf52]">Reactjs</span>,{" "}
+            <span className="text-[#bfbf52]">NodeJS</span>,{" "}
           </p>
-          <div className="flex gap-5 items-center">
-            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+          <p className="text-black text-xs sm:text-sm">
+            Tools used: <span className="text-[#bfbf52]">Bcrypt</span>,{" "}
+            <span className="text-[#bfbf52]">JWT</span>,{" "}
+            <span className="text-[#bfbf52]">Zustand</span>,{" "}
+          </p>
+          <div className="flex gap-3 sm:gap-5 items-center">
+            <button className="p-1 px-2 sm:px-3 rounded-full mt-4 sm:mt-6 bg-black text-white text-xs sm:text-sm">
               View Demo
             </button>
-            <button className="p-1 px-3 rounded-full mt-6 bg-black text-white">
+            <button className="p-1 px-2 sm:px-3 rounded-full mt-4 sm:mt-6 bg-black text-white text-xs sm:text-sm">
               Source Code
             </button>
           </div>
@@ -196,8 +230,8 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col-reverse md:flex-row h-screen overflow-hidden bg-gray-100">
-      <div className="md:w-1/2 w-full h-[65%] md:h-full flex-col flex items-center justify-around md:p-10 p-2">
+    <div className="flex flex-col-reverse md:flex-row md:h-screen h-[110vh] overflow-hidden bg-gray-100">
+      <div className="md:w-1/2 w-full h-[60%] md:h-full flex-col flex items-center justify-around p-2 md:p-4 lg:p-10">
         <motion.div
           key={project}
           initial={{ opacity: 0, y: 20 }}
@@ -207,37 +241,37 @@ const Home: React.FC = () => {
             duration: 0.5,
             ease: "easeInOut",
           }}
-          className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-2xl md:text-lg text-sm"
+          className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-2xl text-xs sm:text-sm md:text-base lg:text-lg"
         >
           {projectDisplay(project)}
         </motion.div>
-        <button className="p-3 rounded-full mt-6 bg-black text-white shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out">
+        <button className="p-2 sm:p-3 rounded-lg border border-zinc-700 mt-4 sm:mt-6 bg-zinc-100 text-zinc-700 font-semibold shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out text-xs sm:text-sm">
           View all my projects
         </button>
       </div>
       <div
         ref={containerRef}
-        className="mt-10 md:w-1/2 w-full h-[35%] md:h-full flex flex-col justify-around items-center md:p-10 p-2 md:text-2xl text-sm"
+        className="md:w-1/2 w-full h-[40%] md:h-full flex flex-col justify-around items-center p-2 md:p-4 lg:p-10 text-xs sm:text-sm md:text-base lg:text-xl"
       >
         <Alert
           title="Interact with the Projects!"
           description="Drag and swap the items below to view detailed project information in the showcase area."
         />
         <div
-          className="md:h-1/3 h-2/3 md:w-1/2 w-3/5 a rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out md:text-4xl text-2xl"
+          className="h-1/2 md:h-1/3 w-3/4 md:w-1/2 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out text-base sm:text-xl md:text-2xl lg:text-4xl border-2 border-dashed border-black flex items-center justify-center"
           data-swapy-slot="one"
         >
           <A />
         </div>
-        <div className="flex h-1/2 w-full items-center justify-evenly space-x-8">
+        <div className="flex h-1/3 w-full items-center justify-evenly space-x-4 sm:space-x-8">
           <div
-            className="md:h-1/2 h-2/3 b md:w-1/3 w-2/5 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out"
+            className="h-3/4 md:h-1/2 w-[45%] md:w-1/3 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out"
             data-swapy-slot="two"
           >
             <B />
           </div>
           <div
-            className="md:h-1/2 h-2/3 c md:w-1/3 w-2/5 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out"
+            className="h-3/4 md:h-1/2 w-[45%] md:w-1/3 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out"
             data-swapy-slot="three"
           >
             <C />

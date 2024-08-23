@@ -54,19 +54,20 @@ const GlossyHeroSection: React.FC = () => {
             sometimes
           </p>
           <div className="flex flex-col md:flex-row items-center gap-10">
-            <button className="rounded-full bg-gradient-to-r from-[#ccccb1] to-[#DCDCCD] px-8 py-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
+            <button className="rounded-full bg-gradient-to-r from-[#bebe98] to-[#DCDCCD] px-8 py-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
               View Projects
             </button>
             <div className="gap-3 flex items-center">
-              <button className="rounded-full bg-gradient-to-r from-[#ccccb1] to-[#DCDCCD] p-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
+              <button className="rounded-full bg-gradient-to-r from-[#bebe98] to-[#DCDCCD] p-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
                 <Github />
               </button>
-              <button className="rounded-full bg-gradient-to-r from-[#ccccb1] to-[#DCDCCD] p-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
+              <button className="rounded-full bg-gradient-to-r from-[#bebe98] to-[#DCDCCD] p-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
                 <Twitter />
               </button>
-              <button className="rounded-full bg-gradient-to-r from-[#ccccb1] to-[#DCDCCD] p-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
+              <button className="rounded-full bg-gradient-to-r from-[#bebe98] to-[#DCDCCD] p-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl">
                 <MailPlus />
-                {/* A8A890 */}
+                {/* A8A890
+                ccccb1 */}
               </button>
             </div>
           </div>

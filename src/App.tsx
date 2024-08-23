@@ -9,8 +9,8 @@ function App() {
     <div className=" w-screen bg-blue-900">
       <Navbar />
       <GlossyHeroSection />
-
       <Home />
+      <div className="h-screen w-screen"></div>
     </div>
   );
 }
