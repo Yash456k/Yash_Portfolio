@@ -58,7 +58,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white bg-opacity-0 backdrop-blur-lg px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">
-        <div className="text-3xl font-bold text-[#b3b382]">Yash K</div>
+        <div className="md:text-4xl text-3xl font-bold font-fancy text-[#b3b382]">
+          Yash K
+        </div>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} className="text-gray-600">
             <Menu size={24} />
