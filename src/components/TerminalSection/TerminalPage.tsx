@@ -73,7 +73,7 @@ const TerminalPage: React.FC = () => {
         ].join("\n");
 
       case trimmedCmd === "clear":
-        setCommandHistory([]);
+        setCommandHistory([...defaultInfo]);
         return "";
 
       case trimmedCmd.startsWith("echo "):
