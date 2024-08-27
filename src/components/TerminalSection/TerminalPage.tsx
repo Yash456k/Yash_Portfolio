@@ -160,7 +160,7 @@ const TerminalPage: React.FC = () => {
 
   return (
     <div className="text-left min-h-screen w-full flex-col bg-black flex justify-center items-center p-4">
-      <div className="text-left w-full max-w-2xl flex items-center justify-center flex-col break-words">
+      <div className="text-left w-full max-w-[55rem] flex items-center justify-center flex-col break-words">
         <h2 className="text-white w-full text-4xl mb-3">Terminal</h2>
         <div className="text-white rounded-xl border-2 w-full h-[450px] border-white/30 bg-black flex flex-col">
           <div className="w-full h-12 flex flex-row justify-between items-center p-3 mb-3">
@@ -179,11 +179,11 @@ const TerminalPage: React.FC = () => {
           >
             {commandHistory.map((entry) =>
               entry.id === 0 ? (
-                <div>
-                  <p key={entry.id} className="text-lg text-white/70">
-                    {entry.input}
-                  </p>
-                  <p className="text-xs italic text-white/70">{entry.output}</p>{" "}
+                <div key={entry.id}>
+                  <p className="text-lg text-white/70">{entry.input}</p>
+                  <p className="text-xs italic text-white/70">
+                    {entry.output}
+                  </p>{" "}
                 </div>
               ) : (
                 <div key={entry.id}>
