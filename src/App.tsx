@@ -5,7 +5,7 @@ import Projects from "./components/projects/Projects";
 import Navbar from "./components/Navbar";
 import TerminalPage from "./components/TerminalSection/TerminalPage";
 import SkillsSection from "./components/skillsection/skillsection";
-import EndSection from "./components/endSection/endSection";
+import EndSection from "./components/endSection/EndSection";
 
 function App() {
   return (
