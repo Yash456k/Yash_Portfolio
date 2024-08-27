@@ -5,7 +5,6 @@ import reactPng from "../../assets/React-icon.svg.png";
 import nodePng from "../../assets/nodejs.png";
 import expressPng from "../../assets/expressjs.png";
 import nextPng from "../../assets/nextjs.png";
-import jsPng from "../../assets/javascript.png";
 import typePng from "../../assets/typescript.png";
 import mongoPng from "../../assets/mongodb.png";
 import tailwindPng from "../../assets/tailwindcss.png";
@@ -22,7 +21,6 @@ const skills: Skill[] = [
   { name: "TypeScript", image: typePng },
   { name: "NextJs", image: nextPng },
   { name: "React", image: reactPng },
-  { name: "Javascript", image: jsPng },
   { name: "Node.js", image: nodePng },
   { name: "MongoDb", image: mongoPng },
   { name: "Express", image: expressPng },
@@ -58,7 +56,7 @@ const SkillCard: React.FC<{ skill: Skill; index: number }> = ({
         visible: {
           opacity: 1,
           y: 0,
-          transition: { delay: index * 0.15 },
+          transition: { delay: index * 0.2 },
           rotate: `${rand}deg`,
         },
         hidden: { opacity: 0, y: 20 },
@@ -68,7 +66,7 @@ const SkillCard: React.FC<{ skill: Skill; index: number }> = ({
       <img
         src={skill.image}
         alt={skill.name}
-        className="w-28 h-28 object-contain  hidden sm:block"
+        className="w-24 h-20 object-contain  hidden sm:block"
       />
       <p className="md:hidden text-center text-white font-semibold">
         {skill.name}
@@ -97,13 +95,24 @@ const SkillsSection: React.FC = () => {
           animate={controls}
           initial="hidden"
           variants={{
-            visible: { opacity: 1, y: 0, transition: { delay: 0.15 } },
+            visible: { opacity: 1, y: 0, transition: { delay: 0.2 } },
             hidden: { opacity: 0, y: -20 },
           }}
-          className="text-5xl font-bold text-center mb-12 underline underline-offset-8"
+          className="text-5xl font-bold text-center mb-6 underline underline-offset-8"
         >
           Skills
         </motion.h2>
+        <motion.p
+          animate={controls}
+          initial="hidden"
+          variants={{
+            visible: { opacity: 1, y: 0, transition: { delay: 0.3 } },
+            hidden: { opacity: 0, y: -20 },
+          }}
+          className="mb-9 text-center text-xl font-semibold"
+        >
+          Currently specialize in MERN. Learning NextJS and DevOps.
+        </motion.p>
         <div className="flex flex-wrap justify-center gap-4">
           {skills.map((skill, index) => (
             <SkillCard key={skill.name} skill={skill} index={index + 1} />

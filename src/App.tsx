@@ -5,6 +5,7 @@ import Projects from "./components/projects/Projects";
 import Navbar from "./components/Navbar";
 import TerminalPage from "./components/TerminalSection/TerminalPage";
 import SkillsSection from "./components/skillsection/skillsection";
+import EndSection from "./components/endSection/endSection";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <SkillsSection />
       <TerminalPage />
       <Projects />
+      <EndSection />
     </div>
   );
 }

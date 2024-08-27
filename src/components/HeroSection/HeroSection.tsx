@@ -5,15 +5,23 @@ import TypeWriter from "./TypeWriter";
 interface SocialButtonProps {
   icon: React.ReactNode;
   ariaLabel: string;
+  link: string;
 }
 
-const SocialButton: React.FC<SocialButtonProps> = ({ icon, ariaLabel }) => (
-  <button
+const SocialButton: React.FC<SocialButtonProps> = ({
+  icon,
+  ariaLabel,
+  link,
+}) => (
+  <a
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
     className="rounded-full bg-gradient-to-r from-[#bebe98] to-[#DCDCCD] p-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:from-[#919180] hover:to-[#c8c8ba] hover:shadow-xl"
     aria-label={ariaLabel}
   >
     {icon}
-  </button>
+  </a>
 );
 
 const HeroSection: React.FC = () => {
@@ -39,9 +47,21 @@ const HeroSection: React.FC = () => {
               View Projects
             </button>
             <div className="flex gap-3 items-center">
-              <SocialButton icon={<Github />} ariaLabel="GitHub" />
-              <SocialButton icon={<Twitter />} ariaLabel="Twitter" />
-              <SocialButton icon={<MailPlus />} ariaLabel="Email" />
+              <SocialButton
+                icon={<Github />}
+                ariaLabel="GitHub"
+                link="https://github.com/Yash456k"
+              />
+              <SocialButton
+                icon={<Twitter />}
+                ariaLabel="Twitter"
+                link="https://x.com/yash654k"
+              />
+              <SocialButton
+                icon={<MailPlus />}
+                ariaLabel="Email"
+                link="mailto:yash456k@gmail.com"
+              />
             </div>
           </div>
         </div>
