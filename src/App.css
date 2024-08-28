@@ -3,3 +3,6 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth !important;
 }
+::selection {
+  background: #ff8c009c;
+}

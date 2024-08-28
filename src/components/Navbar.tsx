@@ -1,22 +1,51 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface MenuItem {
   id: string;
   label: string;
-  submenu: string[];
+  submenu: SubMenuItem[];
+}
+
+interface SubMenuItem {
+  label: string;
+  path: string;
+  isRoute: boolean;
 }
 
 const menuItems: MenuItem[] = [
-  { id: "home", label: "HOME", submenu: ["Dashboard", "Profile"] },
-  { id: "about", label: "ABOUT", submenu: ["Our Story", "Team", "Vision"] },
+  { id: "home", label: "HOME", submenu: [] },
   {
-    id: "services",
-    label: "SERVICES",
-    submenu: ["Development"],
+    id: "projects",
+    label: "PROJECTS",
+    submenu: [
+      {
+        label: "Highlighted Projects",
+        path: "#highlighted-projects",
+        isRoute: false,
+      },
+      { label: "All Projects", path: "/all-projects", isRoute: true },
+    ],
   },
-  { id: "contact", label: "CONTACT", submenu: ["Email", "Phone", "Location"] },
+  {
+    id: "about",
+    label: "ABOUT ME",
+    submenu: [
+      { label: "Summary", path: "/about", isRoute: true },
+      { label: "Skills", path: "#skills", isRoute: false },
+    ],
+  },
+  {
+    id: "contact",
+    label: "CONTACT",
+    submenu: [
+      { label: "Email", path: "#email", isRoute: false },
+      { label: "Phone", path: "#phone", isRoute: false },
+      { label: "Location", path: "#location", isRoute: false },
+    ],
+  },
 ];
 
 const Navbar: React.FC = () => {
@@ -24,6 +53,7 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [elementHeight, setElementHeight] = useState<string>("0px");
   const timeoutRef = useRef<number | null>(null);
+  const navigate = useNavigate();
 
   const handleMouseEnter = (id: string): void => {
     setActiveItem(id);
@@ -45,6 +75,16 @@ const Navbar: React.FC = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleNavigation = (path: string, isRoute: boolean) => {
+    if (isRoute) {
+      navigate(path);
+    } else {
+      // For non-route items, we'll use the current page's URL and append the anchor
+      window.location.href = `${window.location.pathname}${path}`;
+    }
+    setIsMobileMenuOpen(false);
   };
 
   useEffect(() => {
@@ -74,8 +114,13 @@ const Navbar: React.FC = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <motion.a
-                  href="#home"
-                  className="text-[#d2691e] cursor-pointer rounded-none  py-2 text-base font-medium px-4 border-none outline-none focus:outline-none font-sans overflow-hidden"
+                  onClick={() =>
+                    handleNavigation(
+                      item.submenu[0]?.path || `#${item.id}`,
+                      item.submenu[0]?.isRoute || false
+                    )
+                  }
+                  className="text-[#d2691e] cursor-pointer rounded-none py-2 text-base font-medium px-4 border-none outline-none focus:outline-none font-sans overflow-hidden"
                   whileHover={{
                     backgroundColor: "#d2691e",
                     color: "#ffffff",
@@ -124,10 +169,12 @@ const Navbar: React.FC = () => {
                       {item.submenu.map((subItem, index) => (
                         <a
                           key={index}
-                          href="#"
-                          className="block py-2 text-sm text-gray-600 hover:text-purple-600 overflow-hidden "
+                          onClick={() =>
+                            handleNavigation(subItem.path, subItem.isRoute)
+                          }
+                          className="block py-2 text-sm text-gray-600 hover:text-purple-600 overflow-hidden cursor-pointer"
                         >
-                          {subItem}
+                          {subItem.label}
                         </a>
                       ))}
                     </motion.div>
@@ -162,10 +209,12 @@ const Navbar: React.FC = () => {
                 ?.submenu.map((subItem, index) => (
                   <a
                     key={index}
-                    href="#"
-                    className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 hover:bg-opacity-50 "
+                    onClick={() =>
+                      handleNavigation(subItem.path, subItem.isRoute)
+                    }
+                    className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer"
                   >
-                    {subItem}
+                    {subItem.label}
                   </a>
                 ))}
             </div>

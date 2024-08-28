@@ -86,7 +86,10 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen w-full flex justify-center items-center bg-black text-white p-8 flex-col">
+    <section
+      id="contact"
+      className="min-h-screen w-full flex justify-center items-center bg-black text-white p-8 flex-col"
+    >
       <h2 className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
         Get in Touch
       </h2>
