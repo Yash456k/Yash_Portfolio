@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 
 interface TypeWriterProps {
   texts: string[];
+  color: string;
 }
 
-const TypeWriter: React.FC<TypeWriterProps> = ({ texts }) => {
+const TypeWriter: React.FC<TypeWriterProps> = ({ texts, color }) => {
   const [currentText, setCurrentText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -40,7 +41,7 @@ const TypeWriter: React.FC<TypeWriterProps> = ({ texts }) => {
 
   return (
     <>
-      <span className="text-[#a9a94c] transition-colors duration-300">
+      <span className={`text-[${color}] transition-colors duration-300`}>
         {currentText}
       </span>
       <span className="animate-pulse">|</span>

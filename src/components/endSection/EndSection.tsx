@@ -1,5 +1,6 @@
-import React, { useState, FormEvent } from "react";
-import { Send } from "lucide-react";
+import React, { useState, FormEvent, useRef, useEffect } from "react";
+import { Send, User, Mail, MessageSquare } from "lucide-react";
+import { motion, useAnimation } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 type FormData = {
@@ -8,7 +9,33 @@ type FormData = {
   message: string;
 };
 
-const EndSection: React.FC = () => {
+const useIntersectionObserver = (threshold = 0.1) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [threshold]);
+
+  return [ref, isVisible] as const;
+};
+
+const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     user_name: "",
     user_email: "",
@@ -18,6 +45,15 @@ const EndSection: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+
+  const [ref, isVisible] = useIntersectionObserver();
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isVisible) {
+      controls.start({ opacity: 1, y: 0 });
+    }
+  }, [isVisible, controls]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -50,98 +86,127 @@ const EndSection: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen w-full flex justify-center items-center bg-black text-white p-4 flex-col">
-      <h2 className="text-3xl font-bold mb-8 text-center">Contact Me</h2>
-      <p className="text-xl mb-8">
+    <section className="min-h-screen w-full flex justify-center items-center bg-black text-white p-8 flex-col">
+      <h2 className="text-4xl font-bold mb-4 text-center bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+        Get in Touch
+      </h2>
+      <p className="text-xl mb-4">
         You can contact me via email, or message me on{" "}
         <a
+          className="inline text-blue-500"
           href="https://www.x.com/yash654k"
           target="blank"
-          className="text-blue-600 inline "
         >
-          Twitter.
+          Twitter
         </a>{" "}
+        if that suits you better.
       </p>
-      <div className="w-full max-w-md">
-        <form onSubmit={sendEmail} className="space-y-6">
-          <div>
-            <label
-              htmlFor="user_name"
-              className="block text-sm font-medium mb-1"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="user_name"
-              name="user_name"
-              placeholder="Enter your name here"
-              value={formData.user_name}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+      <a
+        className="underline text-xl mb-8"
+        href="mailto:yashkhambhattak@gmail.com"
+        target="blank"
+      >
+        yashkhambhattak@gmail.com
+      </a>
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-xl"
+      >
+        <form onSubmit={sendEmail} className="space-y-6" autoComplete="off">
+          <div className="flex space-x-4">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                id="user_name"
+                name="user_name"
+                value={formData.user_name}
+                onChange={handleChange}
+                autoComplete="off"
+                required
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-white placeholder-gray-500 pr-10"
+                placeholder="Your Name"
+              />
+              <User
+                className="absolute right-3 top-3 text-gray-500"
+                size={20}
+              />
+            </div>
+            <div className="relative flex-1">
+              <input
+                type="email"
+                id="user_email"
+                name="user_email"
+                value={formData.user_email}
+                onChange={handleChange}
+                autoComplete="off"
+                required
+                className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-white placeholder-gray-500 pr-10"
+                placeholder="Your Email"
+              />
+              <Mail
+                className="absolute right-3 top-3 text-gray-500"
+                size={20}
+              />
+            </div>
           </div>
-          <div>
-            <label
-              htmlFor="user_email"
-              className="block text-sm font-medium mb-1"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="user_email"
-              name="user_email"
-              placeholder="Enter your Email here"
-              value={formData.user_email}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-1">
-              Message
-            </label>
+          <div className="relative">
             <textarea
               id="message"
               name="message"
-              placeholder="Enter your message"
               value={formData.message}
               onChange={handleChange}
               required
-              rows={4}
-              className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows={8}
+              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-white text-white placeholder-gray-500 pr-10 resize-none"
+              placeholder="Your Message"
+            />
+            <MessageSquare
+              className="absolute right-3 top-3 text-gray-500"
+              size={20}
             />
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             type="submit"
             disabled={isSubmitting}
-            className="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+            className="w-full flex items-center justify-center px-6 py-3 bg-white text-black rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold text-lg"
           >
             {isSubmitting ? (
-              "Sending..."
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              >
+                <Send className="h-5 w-5" />
+              </motion.div>
             ) : (
               <>
-                Send <Send className="ml-2 h-4 w-4" />
+                Send Message <Send className="ml-2 h-5 w-5" />
               </>
             )}
-          </button>
+          </motion.button>
         </form>
-        {submitStatus === "success" && (
-          <p className="mt-4 text-green-400 text-center">
-            Message sent successfully!
-          </p>
-        )}
-        {submitStatus === "error" && (
-          <p className="mt-4 text-red-400 text-center">
-            Failed to send message. Please try again.
-          </p>
-        )}
-      </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: submitStatus !== "idle" ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="mt-4 text-center"
+        >
+          {submitStatus === "success" && (
+            <p className="text-green-400">Message sent successfully!</p>
+          )}
+          {submitStatus === "error" && (
+            <p className="text-red-400">
+              Failed to send message. Please try again.
+            </p>
+          )}
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
 
-export default EndSection;
+export default ContactForm;

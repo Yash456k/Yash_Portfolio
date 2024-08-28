@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white bg-opacity-0 backdrop-blur-lg px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">
-        <div className="md:text-4xl text-3xl font-bold font-fancy text-[#b3b382]">
+        <div className="md:text-4xl text-3xl font-bold font-fancy text-[#d2691e]">
           Yash K
         </div>
         <div className="md:hidden">
@@ -68,15 +68,16 @@ const Navbar: React.FC = () => {
         </div>
         <ul className="hidden md:flex">
           {menuItems.map((item) => (
-            <li key={item.id} className="relative ">
+            <li key={item.id} className="relative">
               <motion.div
                 onMouseEnter={() => handleMouseEnter(item.id)}
                 onMouseLeave={handleMouseLeave}
               >
-                <motion.button
-                  className="text-black rounded-none  py-2 text-base font-medium px-4 border-none outline-none focus:outline-none font-sans overflow-hidden"
+                <motion.a
+                  href="#home"
+                  className="text-[#d2691e] cursor-pointer rounded-none  py-2 text-base font-medium px-4 border-none outline-none focus:outline-none font-sans overflow-hidden"
                   whileHover={{
-                    backgroundColor: "#b3b382",
+                    backgroundColor: "#d2691e",
                     color: "#ffffff",
                   }}
                   transition={{
@@ -85,7 +86,7 @@ const Navbar: React.FC = () => {
                   }}
                 >
                   {item.label}
-                </motion.button>
+                </motion.a>
               </motion.div>
             </li>
           ))}
@@ -145,7 +146,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: elementHeight }}
             exit={{ opacity: 0, height: 0 }}
             transition={{
-              duration: 0.3,
+              duration: 0.5,
             }}
             className="fixed left-0 mt-2 w-screen shadow-lg bg-white bg-opacity-90 backdrop-blur-md ring-1 ring-black ring-opacity-5 overflow-hidden hidden md:block"
             onMouseEnter={() => {
