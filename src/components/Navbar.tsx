@@ -82,9 +82,11 @@ const Navbar: React.FC = () => {
   const handleNavigation = (path: string, isRoute: boolean) => {
     if (isRoute) {
       navigate(path);
+      window.scrollTo({ top: 0, behavior: "auto" });
     } else {
       if (location.pathname !== "/") {
         navigate("/");
+
         setTimeout(() => {
           // need to put path.replace here because the actual id is stored as /#highlighted-section and i need to input with the #
           const element = document.querySelector(path.replace("/", ""));
