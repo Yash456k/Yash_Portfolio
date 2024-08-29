@@ -72,6 +72,13 @@ const HeroSection: React.FC = () => {
           </p>
           <div className="flex flex-col md:flex-row items-center gap-10">
             <button
+              onClick={() => {
+                const element = document.querySelector("#highlighted-projects");
+                console.log(element);
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
               className="rounded-full px-8 py-3 text-xl font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
               style={{
                 background: `linear-gradient(to right, ${colorSet.gradient[0]}, ${colorSet.gradient[1]})`,

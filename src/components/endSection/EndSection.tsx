@@ -96,7 +96,7 @@ const ContactForm: React.FC = () => {
       <p className="text-xl mb-4">
         You can contact me via email, or message me on{" "}
         <a
-          className="inline text-blue-500"
+          className="inline text-[#ff8c00]"
           href="https://www.x.com/yash654k"
           target="blank"
         >

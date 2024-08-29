@@ -8,6 +8,7 @@ import MernNotesPng from "../../assets/MERN_Notes_App.png";
 import Alert from "../Alert";
 import ProjectCard from "./ProjectCard";
 import ProjectDetails from "./ProjectDetails";
+import { useNavigate } from "react-router-dom";
 
 interface Project {
   id: string;
@@ -40,6 +41,7 @@ const projects: Project[] = [
 const Home: React.FC = () => {
   const containerRef = useRef(null);
   const [activeProject, setActiveProject] = useState<string>("a");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (containerRef.current) {
@@ -52,7 +54,10 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col-reverse md:flex-row md:h-screen h-[120vh] overflow-hidden bg-gray-100">
+    <section
+      id="highlighted-projects"
+      className="flex flex-col-reverse md:flex-row md:h-screen h-[120vh] overflow-hidden bg-gray-100"
+    >
       <div className="md:w-1/2 w-full h-[60%] md:h-full flex-col flex items-center md:justify-around justify-evenly p-2 md:p-4 lg:p-10">
         <motion.div
           key={activeProject}
@@ -64,7 +69,12 @@ const Home: React.FC = () => {
         >
           <ProjectDetails projectId={activeProject} />
         </motion.div>
-        <button className="p-2 sm:p-3 rounded-lg border border-zinc-700 mt-4 sm:mt-6 bg-zinc-100 text-zinc-700 font-semibold shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out text-xs sm:text-sm">
+        <button
+          onClick={() => {
+            navigate("/all-projects");
+          }}
+          className="p-2 sm:p-3 rounded-lg border border-zinc-700 mt-4 sm:mt-6 bg-zinc-100 text-zinc-700 font-semibold shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out text-xs sm:text-sm"
+        >
           View all my projects
         </button>
       </div>
@@ -97,7 +107,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

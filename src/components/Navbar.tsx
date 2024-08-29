@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface MenuItem {
   id: string;
@@ -21,12 +21,17 @@ const menuItems: MenuItem[] = [
     id: "projects",
     label: "PROJECTS",
     submenu: [
+      { label: "All Projects", path: "/all-projects", isRoute: true },
       {
-        label: "Highlighted Projects",
-        path: "#highlighted-projects",
+        label: "Terminal",
+        path: "/#terminal",
         isRoute: false,
       },
-      { label: "All Projects", path: "/all-projects", isRoute: true },
+      {
+        label: "Highlighted Projects",
+        path: "/#highlighted-projects",
+        isRoute: false,
+      },
     ],
   },
   {
@@ -34,17 +39,13 @@ const menuItems: MenuItem[] = [
     label: "ABOUT ME",
     submenu: [
       { label: "Summary", path: "/about", isRoute: true },
-      { label: "Skills", path: "#skills", isRoute: false },
+      { label: "Skills", path: "/#skills", isRoute: false },
     ],
   },
   {
     id: "contact",
     label: "CONTACT",
-    submenu: [
-      { label: "Email", path: "#email", isRoute: false },
-      { label: "Phone", path: "#phone", isRoute: false },
-      { label: "Location", path: "#location", isRoute: false },
-    ],
+    submenu: [],
   },
 ];
 
@@ -54,6 +55,7 @@ const Navbar: React.FC = () => {
   const [elementHeight, setElementHeight] = useState<string>("0px");
   const timeoutRef = useRef<number | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleMouseEnter = (id: string): void => {
     setActiveItem(id);
@@ -81,8 +83,22 @@ const Navbar: React.FC = () => {
     if (isRoute) {
       navigate(path);
     } else {
-      // For non-route items, we'll use the current page's URL and append the anchor
-      window.location.href = `${window.location.pathname}${path}`;
+      if (location.pathname !== "/") {
+        navigate("/");
+        setTimeout(() => {
+          // need to put path.replace here because the actual id is stored as /#highlighted-section and i need to input with the #
+          const element = document.querySelector(path.replace("/", ""));
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 200);
+      } else {
+        const element = document.querySelector(path.replace("/", ""));
+        console.log(element);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
     setIsMobileMenuOpen(false);
   };
@@ -94,7 +110,6 @@ const Navbar: React.FC = () => {
       }
     };
   }, []);
-
   return (
     <nav className="bg-white bg-opacity-0 backdrop-blur-lg px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">

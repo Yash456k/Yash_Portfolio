@@ -89,7 +89,7 @@ const SkillsSection: React.FC = () => {
   }, [controls, inView]);
 
   return (
-    <section ref={ref} className="py-16 bg-gray-100 ">
+    <section id="skills" ref={ref} className="py-16 bg-gray-100 ">
       <div className="container mx-auto px-4 max-w-screen-md">
         <motion.h2
           animate={controls}

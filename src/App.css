@@ -5,4 +5,5 @@ body {
 }
 ::selection {
   background: #ff8c009c;
+  color: black;
 }
