@@ -80,38 +80,40 @@ const Navbar: React.FC = () => {
   };
 
   const handleNavigation = (path: string, isRoute: boolean) => {
+    setIsMobileMenuOpen(false);
+
     if (isRoute) {
       navigate(path);
-      window.scrollTo({ top: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      if (location.pathname !== "/") {
-        navigate("/");
+      const targetPath = location.pathname === "/" ? path : "/";
+      navigate(targetPath);
 
-        setTimeout(() => {
-          // need to put path.replace here because the actual id is stored as /#highlighted-section and i need to input with the #
-          const element = document.querySelector(path.replace("/", ""));
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 200);
-      } else {
+      setTimeout(() => {
         const element = document.querySelector(path.replace("/", ""));
-        console.log(element);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      }
+      }, 100);
     }
-    setIsMobileMenuOpen(false);
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
     return () => {
+      window.removeEventListener("resize", handleResize);
       if (timeoutRef.current !== null) {
         clearTimeout(timeoutRef.current);
       }
     };
   }, []);
+
   return (
     <nav className="bg-white bg-opacity-0 backdrop-blur-lg px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">
@@ -167,21 +169,28 @@ const Navbar: React.FC = () => {
             {menuItems.map((item) => (
               <div key={item.id} className="py-2">
                 <button
-                  onClick={() =>
-                    setActiveItem(activeItem === item.id ? null : item.id)
-                  }
+                  onClick={() => {
+                    if (item.submenu.length === 0) {
+                      handleNavigation(
+                        item.submenu[0]?.path || `/#${item.id}`,
+                        item.submenu[0]?.isRoute || false
+                      );
+                    } else {
+                      setActiveItem(activeItem === item.id ? null : item.id);
+                    }
+                  }}
                   className="w-full text-left text-gray-700 font-medium py-2"
                 >
                   {item.label}
                 </button>
                 <AnimatePresence>
-                  {activeItem === item.id && (
+                  {activeItem === item.id && item.submenu.length > 0 && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="pl-4 "
+                      className="pl-4"
                     >
                       {item.submenu.map((subItem, index) => (
                         <a

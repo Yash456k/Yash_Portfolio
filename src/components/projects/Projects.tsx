@@ -38,7 +38,7 @@ const projects: Project[] = [
   },
 ];
 
-const Home: React.FC = () => {
+const highlightedProjects: React.FC = () => {
   const containerRef = useRef(null);
   const [activeProject, setActiveProject] = useState<string>("a");
   const navigate = useNavigate();
@@ -72,6 +72,7 @@ const Home: React.FC = () => {
         <button
           onClick={() => {
             navigate("/all-projects");
+            window.scrollTo({ top: 0, behavior: "auto" });
           }}
           className="p-2 sm:p-3 rounded-lg border border-zinc-700 mt-4 sm:mt-6 bg-zinc-100 text-zinc-700 font-semibold shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out text-xs sm:text-sm"
         >
@@ -111,4 +112,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default highlightedProjects;
