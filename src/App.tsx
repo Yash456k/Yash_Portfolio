@@ -8,8 +8,10 @@ import SkillsSection from "./components/skillsection/skillsection";
 import EndSection from "./components/endSection/EndSection";
 import AllProjects from "./pages/AllProjects";
 import About from "./pages/About";
+import { inject } from "@vercel/analytics";
 
 function MainContent() {
+  inject();
   return (
     <>
       <HeroSection />
