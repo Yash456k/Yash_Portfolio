@@ -9,9 +9,9 @@
     <br/>
     <br/>
     <br/>
-    <a href="https://yashkportfolio.vercel.app/">View Demo</a>
+    <a target="_blank" href="https://yashkportfolio.vercel.app/">View Demo</a>
     .
-    <a href="https://github.com/Yash456k/Yash_Portfolio/issues">Report Bug</a>
+    <a target="_blank" href="https://github.com/Yash456k/Yash_Portfolio/issues">Report Bug</a>
   </p>
 </p>
 
