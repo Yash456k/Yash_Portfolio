@@ -54,7 +54,7 @@ const HeroSection: React.FC = () => {
         style={{ color: colorSet.primary }}
       >
         <div className="text-center md:text-left md:w-5/12">
-          <p className="text-xl flex items-center">
+          <p className="text-xl flex md:justify-start justify-center items-center">
             <GitFork /> git commit -m "Initial portfolio"
           </p>
           <h1 className="mb-4 text-6xl font-bold text-black md:text-8xl">
@@ -63,10 +63,10 @@ const HeroSection: React.FC = () => {
           <p className="my-4 text-black text-4xl font-semibold">
             I am a <TypeWriter texts={texts} color={colorSet.primary} />
           </p>
-          <p className="my-4 text-2xl break-words text-black">
+          <p className="my-4 text-2xl break-words text-pretty text-black">
             I develop{" "}
             <span style={{ color: colorSet.secondary }}>Full-stack</span>{" "}
-            websites/applications, currently learning about{" "}
+            websites/ applications, currently learning about{" "}
             <span style={{ color: colorSet.secondary }}>DevOps</span> +
             freelance sometimes
           </p>
