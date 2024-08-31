@@ -115,13 +115,22 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="bg-white bg-opacity-0 backdrop-blur-lg px-4 py-2 fixed top-0 left-0 w-full z-50 shadow-md">
+    <nav className="bg-white bg-opacity-0 backdrop-blur-lg md:px-4 md:py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">
-        <div className="md:text-4xl text-3xl font-bold font-fancy text-[#d2691e]">
+        <button
+          onClick={() => {
+            navigate("/");
+            window.scrollTo({ top: 0, behavior: "auto" });
+          }}
+          className=" pl-1 pt-1 md:p-0 md:text-4xl text-3xl font-bold font-fancy text-[#d2691e]"
+        >
           Yash K
-        </div>
+        </button>
         <div className="md:hidden">
-          <button onClick={toggleMobileMenu} className="text-gray-600">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-gray-600 pr-1 md:p-0"
+          >
             <Menu size={24} />
           </button>
         </div>
@@ -164,10 +173,10 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mt-2 overflow-hidden bg-white bg-opacity-50 backdrop-blur-md"
+            className="md:hidden mt-2 overflow-hidden bg-black bg-opacity-5 backdrop-blur-md"
           >
             {menuItems.map((item) => (
-              <div key={item.id} className="py-2">
+              <div key={item.id} className="py-2 px-4">
                 <button
                   onClick={() => {
                     if (item.submenu.length === 0) {
@@ -179,7 +188,7 @@ const Navbar: React.FC = () => {
                       setActiveItem(activeItem === item.id ? null : item.id);
                     }
                   }}
-                  className="w-full text-left text-gray-700 font-medium py-2"
+                  className="w-full text-left text-orange-400 font-medium py-2"
                 >
                   {item.label}
                 </button>
@@ -195,10 +204,11 @@ const Navbar: React.FC = () => {
                       {item.submenu.map((subItem, index) => (
                         <a
                           key={index}
-                          onClick={() =>
-                            handleNavigation(subItem.path, subItem.isRoute)
-                          }
-                          className="block py-2 text-sm text-gray-600 hover:text-purple-600 overflow-hidden cursor-pointer"
+                          onClick={() => {
+                            handleNavigation(subItem.path, subItem.isRoute);
+                            setActiveItem(null);
+                          }}
+                          className="block py-2 text-sm text-[#c46c00] hover:text-purple-600 overflow-hidden cursor-pointer"
                         >
                           {subItem.label}
                         </a>
