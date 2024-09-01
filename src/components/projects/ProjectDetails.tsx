@@ -43,7 +43,7 @@ const projectsData: ProjectData[] = [
     ],
     tools: [{ name: "JWT", color: colors.primary }],
     github: "https://github.com/Yash456k/Marcus_Aurelius_Fullstack",
-    demo: "",
+    demo: "https://quotesbymarcusaurelius.vercel.app/",
   },
   {
     id: "b",
@@ -71,7 +71,7 @@ const projectsData: ProjectData[] = [
       { name: "React Context API", color: colors.primary },
     ],
     github: "https://github.com/Yash456k/SocketIO-MERN-chatApp",
-    demo: "",
+    demo: "https://socket-io-mern-chat-app.vercel.app/",
   },
   {
     id: "c",
@@ -95,7 +95,7 @@ const projectsData: ProjectData[] = [
       { name: "Zustand", color: colors.primary },
     ],
     github: "https://github.com/Yash456k/MERN_Notes_App",
-    demo: "",
+    demo: "https://yash456k-basic-notes-mern-app.netlify.app/",
   },
 ];
 
@@ -147,7 +147,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ projectId }) => {
       <TechToolList items={project.tech} label="Tech used" />
       <TechToolList items={project.tools} label="Tools used" />
       <div className="flex gap-3 sm:gap-5 items-center">
-        <Button text="View Demo" link="" />
+        <Button text="View Demo" link={project.demo} />
         <Button text="Source Code" link={project.github} />
       </div>
     </div>
