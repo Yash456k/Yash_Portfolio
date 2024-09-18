@@ -19,7 +19,7 @@ const projects: Project[] = [
     title: "Quotes by Marcus Aurelius",
     description:
       "An inspiring collection of wisdom from the great Stoic philosopher Marcus Aurelius.",
-    imageUrl: chatAppPng,
+    imageUrl: marcusPng,
     sourceCodeUrl: "https://github.com/Yash456k/Marcus_Aurelius_Fullstack",
     demoUrl: "https://quotesbymarcusaurelius.vercel.app/",
   },
@@ -28,7 +28,7 @@ const projects: Project[] = [
     title: "MERN + socket.io Chat App",
     description:
       "A real-time chat application built with modern web technologies.",
-    imageUrl: marcusPng,
+    imageUrl:chatAppPng ,
     sourceCodeUrl: "https://github.com/Yash456k/SocketIO-MERN-chatApp",
     demoUrl: "https://socket-io-mern-chat-app.vercel.app/",
   },

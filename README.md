@@ -76,7 +76,7 @@ Project is built using NEXTJS Tailwind TypeScript Framer-motion
 git clone https://github.com/Yash456k/Yash_Portfolio
  ```
  ```
-cd portfolio-Project
+cd Yash_Portfolio
   ```
   ```
 npm install
