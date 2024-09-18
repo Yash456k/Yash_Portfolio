@@ -50,7 +50,8 @@ const TerminalPage: React.FC = () => {
           output,
           isNew: true,
         };
-        if (currentInput === "clear") setCommandHistory([...defaultInfo]);
+        if (currentInput.trim().toLowerCase() === "clear")
+          setCommandHistory([...defaultInfo]);
         else setCommandHistory((prev) => [...prev, newEntry]);
         setIsProcessing(false);
       }, 50);
