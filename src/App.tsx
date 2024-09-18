@@ -11,7 +11,7 @@ import About from "./pages/About";
 import { inject } from "@vercel/analytics";
 
 function MainContent() {
-  inject();
+  // inject();
   return (
     <>
       <HeroSection />

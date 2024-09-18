@@ -40,7 +40,7 @@ const projects: Project[] = [
 
 const highlightedProjects: React.FC = () => {
   const containerRef = useRef(null);
-  const [activeProject, setActiveProject] = useState<string>("a");
+  const [activeProject, setActiveProject] = useState<string>("b");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -91,14 +91,14 @@ const highlightedProjects: React.FC = () => {
           className="h-1/2 md:h-1/3 w-3/4 md:w-1/2 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out text-base sm:text-xl md:text-2xl lg:text-4xl border-2 border-dashed border-black flex items-center justify-center"
           data-swapy-slot="one"
         >
-          <ProjectCard project={projects[0]} />
+          <ProjectCard project={projects[1]} />
         </div>
         <div className="flex h-1/3 w-full items-center justify-evenly space-x-4 sm:space-x-8">
           <div
             className="h-3/4 md:h-1/2 w-[45%] md:w-1/3 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out"
             data-swapy-slot="two"
           >
-            <ProjectCard project={projects[1]} />
+            <ProjectCard project={projects[0]} />
           </div>
           <div
             className="h-3/4 md:h-1/2 w-[45%] md:w-1/3 rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out"
