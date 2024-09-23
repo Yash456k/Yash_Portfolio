@@ -61,6 +61,13 @@ const SkillCard: React.FC<{ skill: Skill; index: number }> = ({
         },
         hidden: { opacity: 0, y: 20 },
       }}
+      whileHover={{
+        scale: 1.25,
+        zIndex: 2,
+        rotate: 0,
+        transition: { duration: 0.27 },
+        boxShadow: "2px 2px 100px 1px rgba(0,0,0,0.75)",
+      }}
       className="md:bg-white bg-black rounded-lg shadow-md md:p-2 p-3 flex flex-col items-center"
     >
       <img
