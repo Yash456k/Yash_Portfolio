@@ -3,7 +3,7 @@
     <img style="height:100px;" src="https://github.com/user-attachments/assets/fd2ebae4-fa3f-45c2-8651-377e58c6a1f2" alt="logo" />
   </a>
   <br/>
-  <h3 align="center">Portfolio 2.0</h3>
+  <h3 align="center">Portfolio Project</h3>
   <p align="center">
     Portfolio website by Yash Khambhatta, powered by React + TS
     <br/>
