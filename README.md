@@ -5,7 +5,7 @@
   <br/>
   <h3 align="center">Portfolio 2.0</h3>
   <p align="center">
-    Portfolio website for 2024 powered by React + TS
+    Portfolio website by Yash Khambhatta, powered by React + TS
     <br/>
     <br/>
     <br/>
