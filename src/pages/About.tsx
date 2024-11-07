@@ -23,7 +23,7 @@ function About() {
           <a
             className="cursor-pointer text-[#ff8c00]"
             target="_blank"
-            href="https://www.linkedin.com/in/yash-khambhatta/
+            href="https://www.linkedin.com/in/yash-khambhatta/"
           >
             LinkedIn
           </a>{" "}
