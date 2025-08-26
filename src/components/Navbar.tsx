@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="bg-white bg-opacity-0 backdrop-blur-lg md:px-4 md:py-2 fixed top-0 left-0 w-full z-50 shadow-md">
+    <nav className="font-fancy bg-white bg-opacity-0 backdrop-blur-lg md:px-4 md:py-2 fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="flex justify-between items-center">
         <button
           onClick={() => {
@@ -148,7 +148,7 @@ const Navbar: React.FC = () => {
                       item.submenu[0]?.isRoute || false
                     )
                   }
-                  className="text-[#d2691e] cursor-pointer rounded-none py-2 text-base font-medium px-4 border-none outline-none focus:outline-none font-sans overflow-hidden"
+                  className="text-[#d2691e] cursor-pointer rounded-none py-2 font-medium px-4 border-none outline-none focus:outline-none text-2xl overflow-hidden"
                   whileHover={{
                     backgroundColor: "#d2691e",
                     color: "#ffffff",
@@ -173,7 +173,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mt-2 overflow-hidden bg-black bg-opacity-5 backdrop-blur-md"
+            className="md:hidden mt-2 overflow-hidden bg-black bg-opacity-5 backdrop-blur-md text-xl"
           >
             {menuItems.map((item) => (
               <div key={item.id} className="py-2 px-4">
@@ -208,7 +208,7 @@ const Navbar: React.FC = () => {
                             handleNavigation(subItem.path, subItem.isRoute);
                             setActiveItem(null);
                           }}
-                          className="block py-2 text-sm text-[#c46c00] hover:text-purple-600 overflow-hidden cursor-pointer"
+                          className="block py-2 text-xl text-[#c46c00] hover:text-purple-600 overflow-hidden cursor-pointer"
                         >
                           {subItem.label}
                         </a>
@@ -248,7 +248,7 @@ const Navbar: React.FC = () => {
                     onClick={() =>
                       handleNavigation(subItem.path, subItem.isRoute)
                     }
-                    className="block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer"
+                    className="block px-4 py-2 text-xl text-gray-700 hover:bg-gray-100 hover:bg-opacity-50 cursor-pointer"
                   >
                     {subItem.label}
                   </a>
