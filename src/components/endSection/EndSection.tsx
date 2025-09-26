@@ -1,21 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Mail, Send, Linkedin, Twitter } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ContactForm: React.FC = () => {
+  // A ref to attach to the section element, which the Intersection Observer will watch
+  const sectionRef = useRef<HTMLElement>(null);
+  
   // State to control whether the form or the direct links are visible
+  // It starts as true, but will only flip to false when the section is visible
   const [showForm, setShowForm] = useState(true);
+  
+  // New state to track if the section has been seen
+  const [hasAnimated, setHasAnimated] = useState(false);
 
-  // Effect to switch the view after a delay
+  // useEffect to set up the Intersection Observer
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowForm(false);
-    }, 1500); // The form will be visible for 1.5 seconds
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        
+        // If the section is intersecting (visible) AND it hasn't animated yet
+        if (entry.isIntersecting && !hasAnimated) {
+          // Trigger the form transition after a short delay
+          const timer = setTimeout(() => {
+            setShowForm(false);
+            setHasAnimated(true); // Mark as animated so it doesn't run again
+          }, 500); // Shorter delay (0.5s) to start the transition after user sees it
+          
+          // Stop observing once we've triggered the animation
+          observer.unobserve(entry.target);
+          
+          return () => clearTimeout(timer);
+        }
+      },
+      {
+        root: null, // relative to the viewport
+        rootMargin: '0px',
+        threshold: 0.1, // Trigger when 10% of the element is visible
+      }
+    );
 
-    // Cleanup function to clear the timer if the component unmounts
-    return () => clearTimeout(timer);
-  }, []); // Empty dependency array ensures this runs only once on mount
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
+    // Cleanup function: disconnect the observer when the component unmounts
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [hasAnimated]); // Dependency on hasAnimated to ensure the logic runs correctly
+
+  // Animation variants remain the same
   const formVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: { opacity: 1, y: 0, scale: 1 },
@@ -29,6 +66,7 @@ const ContactForm: React.FC = () => {
 
   return (
     <section
+      ref={sectionRef} // Attach the ref here
       id="contact"
       className="min-h-screen w-full flex justify-center items-center bg-black text-white p-8"
     >
@@ -44,7 +82,7 @@ const ContactForm: React.FC = () => {
               variants={formVariants}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r    bg-clip-text text-transparent">
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r    bg-clip-text text-transparent">
                 Get in Touch
               </h2>
               <p className="text-xl mb-8 text-gray-400">
@@ -90,7 +128,7 @@ const ContactForm: React.FC = () => {
                 Actually, scrap that.
               </h2>
               <p className="text-xl md:text-2xl mb-8 text-white">
-               Just DM or email me directly.
+                Just DM or email me directly.
               </p>
               <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8">
                 {/* Email Link */}
