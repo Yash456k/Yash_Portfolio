@@ -1,91 +1,163 @@
+
 interface Project {
   id: number;
   name: string;
   description: string;
+  link?: string; // Optional link for the project
 }
 
 const projects: Project[] = [
   {
     id: 1,
     name: "MERN Chat App",
-    description:
-      "A fullstack chatting website using MERN and socket.io. You can chat with Google Gemini as well.",
+    description: "A fullstack chatting website using MERN and socket.io. You can chat with Google Gemini as well.",
+    link: "https://yashchatapp.vercel.app/", // Example project link
   },
   {
     id: 2,
     name: "MERN Notes App",
     description: "Just a simple notes app.",
+    link: "https://github.com/Yash456k/MERN_Notes_App",
   },
   {
     id: 3,
-    name: "Qoutes by Marcus Aurelius",
-    description:
-      "A quote displaying webstie featuring hand-picked quotes from 'The Quotes by Marcus Aurelius'.",
+    name: "Quotes by Marcus Aurelius",
+    description: "A quote displaying website featuring hand-picked quotes from 'Meditations by Marcus Aurelius'.",
+    link: "https://github.com/Yash456k/Marcus_Aurelius_Fullstack",
   },
+  // Add more projects here with links!
 ];
 
-export const handleCommand = (cmd: string): string => {
+// Define a type for a command response to include potential side effects like navigation
+export type CommandResponse = {
+  output: string;
+  navigateTo?: string; // URL to navigate to
+  shouldClear?: boolean; // Indicate if the terminal should clear
+};
+
+export const handleCommand = (cmd: string): CommandResponse => {
   const trimmedCmd = cmd.trim().toLowerCase();
+  let output: string = "";
+  let navigateTo: string | undefined;
+  let shouldClear: boolean = false;
 
   switch (true) {
     case trimmedCmd === "help":
-      return [
+      output = [
         "Available commands:",
-        "- help: Show this help message",
-        "- clear: Clear the terminal",
-        "- echo [text]: Display the text",
-        "- proj: View all my projects",
-        "- proj ls: List some of my projects",
-        "- proj info [id]: Show project details",
-        "- about: Show information about this terminal",
-        "- yash: Show information about me",
-        "- date: Display current date and time",
-        "- ls: List files",
+        "  - help: Show this help message",
+        "  - clear: Clear the terminal screen",
+        "  - echo [text]: Display the provided text",
+        "  - proj: Display a list of all projects with options",
+        "  - proj ls: List brief information about some projects",
+        "  - proj info [id]: Show detailed information about a project",
+        "  - proj view [id]: Open a project's link (if available)", // New command
+        "  - about: Show information about this terminal",
+        "  - yash: Show information about me",
+        "  - date: Display current date and time",
+        "  - ls: List files in the current directory",
+        "  - cat [file]: Display contents of a file (e.g., 'cat open.me')",
+        "  - contact: Show my contact details", // New command
+        "  - whoami: Display current user", // New command
       ].join("\n");
+      break;
+
+    case trimmedCmd === "clear":
+      output = "Terminal cleared.";
+      shouldClear = true;
+      break;
 
     case trimmedCmd.startsWith("echo "):
-      return cmd.slice(5).trim();
+      output = cmd.slice(5).trim();
+      break;
 
     case trimmedCmd.startsWith("sudo"):
-      return "Nice try buddy. No priveleges for you.";
+      output = "Nice try, buddy. No privileges for you.";
+      break;
+
+    case trimmedCmd === "proj" || trimmedCmd === "projects": // Added "projects" alias
+      output = [
+        "Welcome to my project directory!",
+        "  - 'proj ls': See a quick list of projects.",
+        "  - 'proj info [id]': Get details on a specific project.",
+        "  - 'proj view [id]': Open the project in your browser (if link available).",
+        "  - For my full portfolio, just visit the 'All Projects' page (usually linked in the navigation)."
+      ].join("\n");
+      break;
 
     case trimmedCmd === "proj ls":
-      return projects.map((p) => `${p.id}. ${p.name}`).join("\n");
+      output = projects.map((p) => `${p.id}. ${p.name}`).join("\n");
+      if (projects.length === 0) output = "No projects listed yet. Stay tuned!";
+      break;
 
     case /^proj info \d+$/.test(trimmedCmd):
-      const id = parseInt(trimmedCmd.split(" ")[2]);
-      const project = projects.find((p) => p.id === id);
-      return project
-        ? `Project: ${project.name}\nDescription: ${project.description}`
-        : "Project not found";
+      const infoId = parseInt(trimmedCmd.split(" ")[2]);
+      const projectInfo = projects.find((p) => p.id === infoId);
+      output = projectInfo
+        ? `Project: ${projectInfo.name}\nDescription: ${projectInfo.description}${projectInfo.link ? `\nLink: ${projectInfo.link}` : ''}`
+        : `Project with ID ${infoId} not found. Try 'proj ls'.`;
+      break;
+
+    case /^proj view \d+$/.test(trimmedCmd): // New command to view project
+      const viewId = parseInt(trimmedCmd.split(" ")[2]);
+      const projectToView = projects.find((p) => p.id === viewId);
+      if (projectToView && projectToView.link) {
+        navigateTo = projectToView.link;
+        output = `Opening project: ${projectToView.name} in a new tab...`;
+      } else if (projectToView && !projectToView.link) {
+        output = `Project ${projectToView.name} does not have a public link available yet.`;
+      } else {
+        output = `Project with ID ${viewId} not found. Try 'proj ls'.`;
+      }
+      break;
 
     case trimmedCmd === "about":
-      return "This is an TypeScript React based terminal component I made.";
+      output = "This is a minimalist, interactive terminal component built with React and TypeScript.";
+      break;
 
     case trimmedCmd === "date":
-      return new Date().toLocaleString();
+      output = new Date().toLocaleString();
+      break;
 
     case trimmedCmd === "yash":
-      return "Hey there! I'm Yash, a full-stack developer who has experience in MERN, currently learning nextJs, interested in DevOps as well.";
+      output = "Hey there! I'm Yash, a full-stack developer with experience in MERN stack. I'm currently expanding my skills with Next.js and diving deeper into DevOps.!";
+      break;
 
     case trimmedCmd === "ls":
-      return "open.me   dont_open.me";
+      output = "open.me \ndont_open.me "; // Added emojis for flair
+      break;
 
     case trimmedCmd === "cat open.me":
-      window.location.href = "https://www.youtube.com/watch?v=8ScAnaU0FFE";
-      return "";
+      navigateTo = "https://www.youtube.com/watch?v=8ScAnaU0FFE"; // A wholesome link
+      output = "A surprise awaits you...";
+      break;
 
     case trimmedCmd === "cat dont_open.me":
-      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-      return "You asked for it";
-    case trimmedCmd === "proj":
-      window.location.href = "/all-projects";
-      return "have fun!";
+      navigateTo = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Rickroll!
+      output = "You asked for it";
+      break;
+    
+    case trimmedCmd === "contact": // New contact command
+      output = [
+        "Reach out to me! I'd love to connect.",
+        "  Email: yashkhambhattak@gmail.com",
+        "  Twitter/X: https://www.x.com/yash654k",
+        "  LinkedIn: https://www.linkedin.com/in/yash-khambhatta (Replace with your actual URL!)"
+      ].join("\n");
+      break;
+
+    case trimmedCmd === "whoami": // New command
+      output = "idk";
+      break;
 
     default:
       if (trimmedCmd.startsWith("cat ")) {
-        return "Can't find file. Please mention a file that exists.";
+        const fileName = trimmedCmd.slice(4).trim();
+        output = `Error: File not found: '${fileName}'. Type 'ls' to see available files.`;
+      } else {
+        output = `Command not found: '${trimmedCmd}'. Type 'help' for available commands.`;
       }
-      return `Command not found: ${trimmedCmd}. Type 'help' for available commands.`;
+      break;
   }
+  return { output, navigateTo, shouldClear };
 };
