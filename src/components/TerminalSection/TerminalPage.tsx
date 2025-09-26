@@ -27,13 +27,7 @@ const TerminalPage: React.FC = () => {
   const outputRef = useRef<HTMLDivElement>(null);
 
   // Focus on the input field whenever the user clicks inside the terminal
-  const focusInput = () => {
-    inputRef.current?.focus();
-  };
 
-  useEffect(() => {
-    focusInput();
-  });
 
   useEffect(() => {
     if (outputRef.current) {
@@ -109,8 +103,7 @@ const TerminalPage: React.FC = () => {
       <div className="text-left w-full max-w-[55rem] flex items-center justify-center flex-col break-words">
         <h2 className="text-white w-full text-4xl mb-3">Terminal</h2>
         <div
-          className="text-white rounded-xl border-2 w-full h-[450px] border-white/30 bg-black flex flex-col font-mono"
-          onClick={focusInput} // Focus input when clicking anywhere in the terminal
+          className="text-white rounded-xl border-2 w-full h-[450px] border-white/30 bg-black flex flex-col font-mono" // Focus input when clicking anywhere in the terminal
         >
           {/* Terminal Header */}
           <div className="w-full h-12 flex flex-row justify-between items-center p-3 mb-3">
