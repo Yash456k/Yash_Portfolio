@@ -1,4 +1,3 @@
-
 interface Project {
   id: number;
   name: string;
@@ -35,6 +34,28 @@ export type CommandResponse = {
   shouldClear?: boolean; // Indicate if the terminal should clear
 };
 
+// Export a list of available commands for autocompletion
+export const availableCommands: string[] = [
+  "help",
+  "clear",
+  "echo",
+  "proj",
+  "projects",
+  "proj ls",
+  "proj info",
+  "proj view",
+  "about",
+  "yash",
+  "date",
+  "ls",
+  "cat",
+  "cat open.me",
+  "cat dont_open.me",
+  "contact",
+  "whoami",
+  "sudo", // Even though it's an invalid command, it's good for autocomplete to show it
+];
+
 export const handleCommand = (cmd: string): CommandResponse => {
   const trimmedCmd = cmd.trim().toLowerCase();
   let output: string = "";
@@ -67,7 +88,10 @@ export const handleCommand = (cmd: string): CommandResponse => {
       shouldClear = true;
       break;
 
-    case trimmedCmd.startsWith("echo "):
+    case trimmedCmd.startsWith("echo"):
+      if(cmd.length <= 5) {
+        output = "Error: No text provided to echo.";
+      } else
       output = cmd.slice(5).trim();
       break;
 
@@ -136,7 +160,7 @@ export const handleCommand = (cmd: string): CommandResponse => {
       navigateTo = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Rickroll!
       output = "You asked for it";
       break;
-    
+
     case trimmedCmd === "contact": // New contact command
       output = [
         "Reach out to me! I'd love to connect.",

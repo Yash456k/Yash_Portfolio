@@ -10,6 +10,7 @@ const ContactForm: React.FC = () => {
   // It starts as true, but will only flip to false when the section is visible
   const [showForm, setShowForm] = useState(true);
   
+  
   // New state to track if the section has been seen
   const [hasAnimated, setHasAnimated] = useState(false);
 

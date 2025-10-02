@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Terminal as TerminalIcon } from "lucide-react";
-import { handleCommand, CommandResponse } from "./commandHandler";
+import { handleCommand, CommandResponse, availableCommands } from "./commandHandler"; // Import availableCommands
 
 interface CommandEntry {
   id: number;
@@ -14,7 +14,7 @@ const defaultInfo: CommandEntry[] = [
     id: 0,
     timestamp: new Date(),
     input: `Hello there`,
-    output: `Type "help" to view all available commands.`,  
+    output: `Type "help" to view all available commands.`,
   },
 ];
 
@@ -22,27 +22,34 @@ const TerminalPage: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [commandHistory, setCommandHistory] = useState<CommandEntry[]>([...defaultInfo]);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [historyIndex, setHistoryIndex] = useState(0); // Start index at 0 for simplicity
+  const [historyIndex, setHistoryIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const hasInteractedRef = useRef(false);
   const outputRef = useRef<HTMLDivElement>(null);
 
-  // Focus on the input field whenever the user clicks inside the terminal
+  // Scroll to bottom whenever commandHistory changes
+useEffect(() => {
+  if (!isProcessing && inputRef.current && hasInteractedRef.current) {
+    inputRef.current.focus();
+  }
+}, [isProcessing, commandHistory]);
 
-
+  // Re-focus on the input field after a command is processed.
+  // This avoids auto-focus on initial page load but keeps the terminal ready for the next command.
   useEffect(() => {
-    if (outputRef.current) {
-      outputRef.current.scrollTop = outputRef.current.scrollHeight;
+    if (!isProcessing && inputRef.current) {
     }
-  }, [commandHistory]);
+  }, [isProcessing, commandHistory]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isProcessing || input.trim() === "") return;
 
+    hasInteractedRef.current = true; // Add this line
     setIsProcessing(true);
     const currentInput = input.trim();
-    
-    // Add command to history before clearing input, then reset history index
+
+    // Reset history index for the next command session
     const commands = commandHistory
       .filter(entry => entry.id !== 0)
       .map(entry => entry.input);
@@ -51,7 +58,7 @@ const TerminalPage: React.FC = () => {
 
     const { output, navigateTo, shouldClear }: CommandResponse = handleCommand(currentInput);
 
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise(resolve => setTimeout(resolve, 300)); // Simulate processing time
 
     if (shouldClear) {
       setCommandHistory([...defaultInfo]);
@@ -92,8 +99,39 @@ const TerminalPage: React.FC = () => {
       const newIndex = Math.min(commands.length, historyIndex + 1);
       setHistoryIndex(newIndex);
       setInput(commands[newIndex] || "");
+    } else if (e.key === "Tab") {
+      e.preventDefault(); // Prevent default tab behavior
+      const currentInputLower = input.toLowerCase();
+
+      const matches = availableCommands.filter(command =>
+        command.startsWith(currentInputLower)
+      );
+
+      if (matches.length === 1) {
+        setInput(matches[0]);
+      } else if (matches.length > 1) {
+        let commonPrefix = matches[0];
+        for (let i = 1; i < matches.length; i++) {
+          while (!matches[i].startsWith(commonPrefix) && commonPrefix.length > 0) {
+            commonPrefix = commonPrefix.slice(0, -1);
+          }
+        }
+        if (commonPrefix.length > input.length) {
+          setInput(commonPrefix);
+        } else {
+          setCommandHistory((prev) => [
+            ...prev,
+            {
+              id: Date.now(),
+              timestamp: new Date(),
+              input: input,
+              output: matches.join("   "),
+            },
+          ]);
+        }
+      }
     }
-  }, [isProcessing, commandHistory, historyIndex]);
+  }, [isProcessing, commandHistory, historyIndex, input]);
 
   return (
     <section
@@ -103,7 +141,11 @@ const TerminalPage: React.FC = () => {
       <div className="text-left w-full max-w-[55rem] flex items-center justify-center flex-col break-words">
         <h2 className="text-white w-full text-4xl mb-3">Terminal</h2>
         <div
-          className="text-white rounded-xl border-2 w-full h-[450px] border-white/30 bg-black flex flex-col font-mono" // Focus input when clicking anywhere in the terminal
+          // Added onClick handler to focus the input when the user clicks anywhere in the terminal window
+onClick={() => {
+  hasInteractedRef.current = true;
+  inputRef.current?.focus();
+}}          className="text-white rounded-xl border-2 w-full h-[450px] border-white/30 bg-black flex flex-col font-mono cursor-text"
         >
           {/* Terminal Header */}
           <div className="w-full h-12 flex flex-row justify-between items-center p-3 mb-3">
