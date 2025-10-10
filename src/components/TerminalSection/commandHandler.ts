@@ -114,15 +114,16 @@ export const handleCommand = (cmd: string): CommandResponse => {
       if (projects.length === 0) output = "No projects listed yet. Stay tuned!";
       break;
 
-    case /^proj info \d+$/.test(trimmedCmd):
+    case /^proj info \d+$/.test(trimmedCmd): {
       const infoId = parseInt(trimmedCmd.split(" ")[2]);
       const projectInfo = projects.find((p) => p.id === infoId);
       output = projectInfo
         ? `Project: ${projectInfo.name}\nDescription: ${projectInfo.description}${projectInfo.link ? `\nLink: ${projectInfo.link}` : ''}`
         : `Project with ID ${infoId} not found. Try 'proj ls'.`;
       break;
+    }
 
-    case /^proj view \d+$/.test(trimmedCmd): // New command to view project
+    case /^proj view \d+$/.test(trimmedCmd): { // New command to view project
       const viewId = parseInt(trimmedCmd.split(" ")[2]);
       const projectToView = projects.find((p) => p.id === viewId);
       if (projectToView && projectToView.link) {
@@ -134,7 +135,7 @@ export const handleCommand = (cmd: string): CommandResponse => {
         output = `Project with ID ${viewId} not found. Try 'proj ls'.`;
       }
       break;
-
+    }
     case trimmedCmd === "about":
       output = "This is a minimalist, interactive terminal component built with React and TypeScript.";
       break;

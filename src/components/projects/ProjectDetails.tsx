@@ -14,6 +14,7 @@ type ProjectData = {
   tools: TechTool[];
   github: string;
   demo: string;
+  deprecated?: boolean;
 };
 
 const colors = {
@@ -44,6 +45,7 @@ const projectsData: ProjectData[] = [
     tools: [{ name: "JWT", color: colors.primary }],
     github: "https://github.com/Yash456k/Marcus_Aurelius_Fullstack",
     demo: "https://quotesbymarcusaurelius.vercel.app/",
+    deprecated: true,
   },
   {
     id: "b",
@@ -96,6 +98,7 @@ const projectsData: ProjectData[] = [
     ],
     github: "https://github.com/Yash456k/MERN_Notes_App",
     demo: "https://yash456k-basic-notes-mern-app.netlify.app/",
+    deprecated: true,
   },
 ];
 
@@ -147,7 +150,29 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ projectId }) => {
       <TechToolList items={project.tech} label="Tech used" />
       <TechToolList items={project.tools} label="Tools used" />
       <div className="flex gap-3 sm:gap-5 items-center">
-        <Button text="View Demo" link={project.demo} />
+        {project.deprecated ? (
+          <div className="relative group">
+            <div
+              className="
+                cursor-not-allowed p-1 px-2 sm:px-3 rounded-full mt-4 sm:mt-6
+                bg-gray-300 text-gray-500 text-xs sm:text-sm opacity-60
+                relative overflow-hidden
+              "
+            >
+              <span className="">View Demo</span>
+              {/* Subtle diagonal line overlay */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-full h-[1px] bg-black transform rotate-12 opacity-80"></div>
+              </div>
+            </div>
+            {/* Tooltip on hover */}
+            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
+              Project no longer maintained
+            </div>
+          </div>
+        ) : (
+          <Button text="View Demo" link={project.demo} />
+        )}
         <Button text="Source Code" link={project.github} />
       </div>
     </div>

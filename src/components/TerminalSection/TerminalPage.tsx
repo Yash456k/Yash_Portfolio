@@ -36,10 +36,6 @@ useEffect(() => {
 
   // Re-focus on the input field after a command is processed.
   // This avoids auto-focus on initial page load but keeps the terminal ready for the next command.
-  useEffect(() => {
-    if (!isProcessing && inputRef.current) {
-    }
-  }, [isProcessing, commandHistory]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
