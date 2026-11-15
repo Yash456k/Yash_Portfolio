@@ -1,11 +1,11 @@
-# Legacy Portfolio — Deprecated
+# Legacy Portfolio (deprecated)
 
 > [!IMPORTANT]
 > This repository is retained as a historical version of my portfolio and is no longer maintained or deployed.
 >
 > **Current portfolio:** [www.yash456k.com](https://www.yash456k.com)
 >
-> **Current source:** [Yash456k/rag-playground](https://github.com/Yash456k/rag-playground)
+> **Current source:** [Yash456k/ask-my-portfolio](https://github.com/Yash456k/ask-my-portfolio)
 
 ## About this repository
 
